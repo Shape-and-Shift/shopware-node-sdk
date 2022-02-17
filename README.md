@@ -113,7 +113,7 @@ Check [examples/sync-api.js](/examples/sync-api.js) or [examples/user-api.js](/e
 
 Follow those steps to run the example:
 
-1. Run `npm install shopware-node-sdk --save`
+1. Run `npm install @shapeandshift/shopware-node-sdk --save`
 2. Update file `/examples/auth-config.json` match with your environment
 3. Run examples `node ./examples/authenticate.js`...
 
