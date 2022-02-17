@@ -13,7 +13,7 @@ npm install @shapeandshift/shopware-node-sdk --save
 ### Import:
 
 ```js
-import { Application } from "shopware-node-sdk";
+import { Application } from "@shapeandshift/shopware-node-sdk";
 
 const options = {
   shopUrl: `YOUR_SHOP_URL`, // https://shop-url.dev
@@ -40,7 +40,7 @@ import {
   ClientCredentialsGrant,
   RefreshTokenGrant,
   GRANT_SCOPE,
-} from "shopware-node-sdk";
+} from "@shapeandshift/shopware-node-sdk";
 
 // Scope parameter is optional, Default: GRANT_SCOPE.WRITE ('write')
 const grantType = new PasswordGrant(username, password, [
@@ -60,7 +60,7 @@ const grantType = new RefreshTokenGrant(refreshToken); // Using refresh_token
 Now, you're able to authenticate the application
 
 ```js
-import { Application } from "shopware-node-sdk";
+import { Application } from "@shapeandshift/shopware-node-sdk";
 
 const authToken = await Application.authenticate(grantType);
 ```
@@ -68,7 +68,7 @@ const authToken = await Application.authenticate(grantType);
 Or you can do this way to only fetch `AuthToken` object
 
 ```js
-import { AdminAuth } from "shopware-node-sdk";
+import { AdminAuth } from "@shapeandshift/shopware-node-sdk";
 
 const adminClient = new AdminAuth(grantType);
 const authToken = await adminClient.fetchAccessToken();
@@ -89,7 +89,7 @@ await Application.setAuthToken(authToken);
 ## Working with Criteria and Repositories
 
 ```js
-import { RepositoryFactory, Criteria } from "shopware-node-sdk";
+import { RepositoryFactory, Criteria } from "@shapeandshift/shopware-node-sdk";
 
 const repository = RepositoryFactory.create("product");
 
