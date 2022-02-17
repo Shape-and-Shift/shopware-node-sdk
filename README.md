@@ -45,11 +45,13 @@ const grantType = new PasswordGrant(username, password, [
   GRANT_SCOPE.WRITE,
   GRANT_SCOPE.USER_VERIFIED,
 ]); // Using username & password
+
 const grantType = new ClientCredentialsGrant(
   clientId,
   clientSecret,
   GRANT_SCOPE.WRITE
 ); // Using client_id & client_secret
+
 const grantType = new RefreshTokenGrant(refreshToken); // Using refresh_token
 ```
 
@@ -57,6 +59,7 @@ const grantType = new RefreshTokenGrant(refreshToken); // Using refresh_token
 
 ```js
 import { Application } from "shopware-node-sdk";
+
 const authToken = await Application.authenticate(grantType);
 ```
 
@@ -64,8 +67,10 @@ const authToken = await Application.authenticate(grantType);
 
 ```js
 import { AdminAuth } from "shopware-node-sdk";
+
 const adminClient = new AdminAuth(grantType);
 const authToken = await adminClient.fetchAccessToken();
+
 await Application.setAuthToken(authToken); // you have to set `AuthToken` object to `Application`
 ```
 
