@@ -1,4 +1,8 @@
-## Quickstart
+Shopware Node SDK is a simple SDK implementation of Shopware 6 APIs. It helps to access the API in an object-oriented way.
+
+If you're familiar with Shopware 6 DAL syntax and how to retrieve it you might see this example is predictable and straightforward
+
+![carbon](https://user-images.githubusercontent.com/8193345/154450648-7e7a4a53-788b-432b-afc6-b38897c976d4.png)
 
 ### Installation:
 
