@@ -1,0 +1,8 @@
+{
+  "username": "admin",
+  "password": "shopware",
+  "shop_url": "http://shopware-dev.test",
+  "client_id": "SWUAOGJLRHFNUETJC0VEMZV4DQ",
+  "client_secret": "SmtoOHo3cWhiMUVRaU5CMkplMjA0bUNTN1A3Qk1qZFN2OVVYVUo",
+  "scope": ["write", "user-verified"]
+}

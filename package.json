@@ -1,0 +1,39 @@
+{
+  "name": "shopware-node-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "lint": "eslint ./src --ext .ts",
+    "lint:fix": "npm run lint -- --fix",
+    "build": "tsc -P ./tsconfig.json",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/shape-and-shift-ltd/shopware-node-sdk.git"
+  },
+  "keywords": [],
+  "author": "shapeandshift",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/shape-and-shift-ltd/shopware-node-sdk/issues"
+  },
+  "homepage": "https://bitbucket.org/shape-and-shift-ltd/shopware-node-sdk#readme",
+  "devDependencies": {
+    "@types/lodash": "^4.14.178",
+    "@types/node": "^17.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "eslint": "^8.7.0",
+    "eslint-plugin-import": "^2.25.4",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "@types/uuid": "^8.3.4",
+    "axios": "^0.24.0",
+    "lodash": "^4.17.21",
+    "uuid": "^8.3.2"
+  }
+}
