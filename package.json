@@ -1,7 +1,7 @@
 {
-  "name": "shopware-node-sdk",
+  "name": "@shapeandshift/shopware-node-sdk",
   "version": "1.0.0",
-  "description": "",
+  "description": "### Installation:",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "keywords": [],
   "author": "shapeandshift",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://bitbucket.org/shape-and-shift-ltd/shopware-node-sdk/issues"
   },
@@ -35,5 +35,8 @@
     "axios": "^0.24.0",
     "lodash": "^4.17.21",
     "uuid": "^8.3.2"
+  },
+  "directories": {
+    "example": "examples"
   }
 }
