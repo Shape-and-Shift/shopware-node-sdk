@@ -14,9 +14,11 @@ npm install shopware-node-sdk --save
 
 ```js
 import { Application } from "shopware-node-sdk";
+
 const options = {
   shopUrl: `YOUR_SHOP_URL`, // https://shop-url.dev
 };
+
 Application.init(options); // Init application
 ```
 
