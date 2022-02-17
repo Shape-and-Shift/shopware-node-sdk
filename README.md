@@ -1,4 +1,8 @@
-## Quickstart
+Shopware Node SDK is a simple SDK implementation of Shopware 6 APIs. It helps to access the API in an object-oriented way.
+
+If you're familiar with Shopware 6 DAL syntax and how to retrieve it you might see this example is predictable and straightforward
+
+![carbon](https://user-images.githubusercontent.com/8193345/154450648-7e7a4a53-788b-432b-afc6-b38897c976d4.png)
 
 ### Installation:
 
@@ -10,9 +14,11 @@ npm install shopware-node-sdk --save
 
 ```js
 import { Application } from "shopware-node-sdk";
+
 const options = {
   shopUrl: `YOUR_SHOP_URL`, // https://shop-url.dev
 };
+
 Application.init(options); // Init application
 ```
 
@@ -41,11 +47,13 @@ const grantType = new PasswordGrant(username, password, [
   GRANT_SCOPE.WRITE,
   GRANT_SCOPE.USER_VERIFIED,
 ]); // Using username & password
+
 const grantType = new ClientCredentialsGrant(
   clientId,
   clientSecret,
   GRANT_SCOPE.WRITE
 ); // Using client_id & client_secret
+
 const grantType = new RefreshTokenGrant(refreshToken); // Using refresh_token
 ```
 
@@ -53,6 +61,7 @@ const grantType = new RefreshTokenGrant(refreshToken); // Using refresh_token
 
 ```js
 import { Application } from "shopware-node-sdk";
+
 const authToken = await Application.authenticate(grantType);
 ```
 
@@ -60,8 +69,10 @@ const authToken = await Application.authenticate(grantType);
 
 ```js
 import { AdminAuth } from "shopware-node-sdk";
+
 const adminClient = new AdminAuth(grantType);
 const authToken = await adminClient.fetchAccessToken();
+
 await Application.setAuthToken(authToken); // you have to set `AuthToken` object to `Application`
 ```
 
@@ -77,6 +88,7 @@ await Application.setAuthToken(authToken);
 
 ```js
 import { RepositoryFactory, Criteria } from "shopware-node-sdk";
+
 const repository = RepositoryFactory.create("product");
 
 const criteria = new Criteria();
