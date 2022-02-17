@@ -7,7 +7,7 @@ If you're familiar with Shopware 6 DAL syntax and how to retrieve it you might s
 ### Installation:
 
 ```sh
-npm install shopware-node-sdk --save
+npm install @shapeandshift/shopware-node-sdk --save
 ```
 
 ### Import:
