@@ -26,9 +26,9 @@ Application.init(options); // Init application
 
 | name                  | Type    | Default    | Description                                                |
 |-----------------------|---------|------------|------------------------------------------------------------|
-| **`shopUrl`**         | String  | (required) | Your shop url                                              |
-| **`apiPath`**         | String  | /api       | Shop API path                                              |
-| **`autoCallRefresh`** | Boolean | true       | Automatic call refresh token and retry the current request |
+| `shopUrl`        | String  | (required) | Your shop url                                              |
+| `apiPath`        | String  | /api       | Shop API path                                              |
+| `autoCallRefresh` | Boolean | true       | Automatic call refresh token and retry the current request |
 
 ## Authentication
 
@@ -57,7 +57,7 @@ const grantType = new ClientCredentialsGrant(
 const grantType = new RefreshTokenGrant(refreshToken); // Using refresh_token
 ```
 
-#### Now, you can do authenticate for the application
+Now, you're able to authenticate the application
 
 ```js
 import { Application } from "shopware-node-sdk";
@@ -65,7 +65,7 @@ import { Application } from "shopware-node-sdk";
 const authToken = await Application.authenticate(grantType);
 ```
 
-#### Or you can do this way to only fetch `AuthToken` object
+Or you can do this way to only fetch `AuthToken` object
 
 ```js
 import { AdminAuth } from "shopware-node-sdk";
@@ -76,13 +76,15 @@ const authToken = await adminClient.fetchAccessToken();
 await Application.setAuthToken(authToken); // you have to set `AuthToken` object to `Application`
 ```
 
-#### Store the authentication token object into the database then you can set it to the `Context` through the `Application`
+Store the authentication token object into the database then you can set it to the `Context` through the `Application`
 
 ```js
 await Application.setAuthToken(authToken);
 ```
 
-#### **Notice:** `adminClient.fetchAccessToken()` automatically call `Application.setAuthToken` so you don't need to call it again.
+#### Notice: 
+
+`adminClient.fetchAccessToken()` automatically call `Application.setAuthToken` so you don't need to call it again.
 
 ## Working with Criteria and Repositories
 
