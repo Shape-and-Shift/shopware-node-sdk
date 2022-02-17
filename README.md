@@ -88,6 +88,7 @@ await Application.setAuthToken(authToken);
 
 ```js
 import { RepositoryFactory, Criteria } from "shopware-node-sdk";
+
 const repository = RepositoryFactory.create("product");
 
 const criteria = new Criteria();
