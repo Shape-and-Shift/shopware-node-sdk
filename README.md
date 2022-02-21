@@ -24,10 +24,10 @@ Application.init(options); // Init application
 
 #### Initial options
 
-| name                  | Type    | Default    | Description                                                |
-|-----------------------|---------|------------|------------------------------------------------------------|
-| `shopUrl`        | String  | (required) | Your shop url                                              |
-| `apiPath`        | String  | /api       | Shop API path                                              |
+| name              | Type    | Default    | Description                                                |
+|-------------------|---------|------------|------------------------------------------------------------|
+| `shopUrl`         | String  | (required) | Your shop url                                              |
+| `apiPath`         | String  | /api       | Shop API path                                              |
 | `autoCallRefresh` | Boolean | true       | Automatic call refresh token and retry the current request |
 
 ## Authentication
@@ -84,7 +84,7 @@ await Application.setAuthToken(authToken);
 
 #### Notice: 
 
-`adminClient.fetchAccessToken()` automatically call `Application.setAuthToken` so you don't need to call it again.
+`Application.authenticate(grantType)` automatically call `Application.setAuthToken` so you don't need to call it again.
 
 ## Working with Criteria and Repositories
 
