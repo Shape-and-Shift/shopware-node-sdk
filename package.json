@@ -14,7 +14,14 @@
     "type": "git",
     "url": "git+ssh://git@github.com:Shape-and-Shift/shopware-node-sdk.git"
   },
-  "keywords": [],
+  "keywords": [
+    "shopware",
+    "node",
+    "sdk",
+    "app",
+    "api",
+    "admin"
+  ],
   "author": "shapeandshift",
   "license": "MIT",
   "bugs": {
