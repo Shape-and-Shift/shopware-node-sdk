@@ -2,7 +2,7 @@ Shopware Node SDK is a simple SDK implementation of Shopware 6 APIs. It helps to
 
 If you're familiar with Shopware 6 DAL syntax and how to retrieve it you might see this example is predictable and straightforward
 
-![carbon](https://user-images.githubusercontent.com/8193345/154450648-7e7a4a53-788b-432b-afc6-b38897c976d4.png)
+![carbon (1)](https://user-images.githubusercontent.com/8193345/155105894-c6a59442-79a2-42cb-a3be-09ba122073fd.png)
 
 ### Installation:
 
