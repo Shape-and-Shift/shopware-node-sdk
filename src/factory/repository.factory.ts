@@ -1,5 +1,5 @@
 import {
-  ChangesetGenerator,
+  ChangesetGenerator, Context, ContextData,
   EntityFactory,
   Repository,
   RepositoryOptions,
@@ -11,11 +11,11 @@ export class RepositoryFactory {
   public static create(
     entityName: string,
     route = '',
-    options: RepositoryOptions = {}
+    options: RepositoryOptions = {},
+    context?: ContextData,
   ): Repository {
-    if (!route) {
-      route = `/${entityName.replace(/_/g, '-')}`;
-    }
+    route ||= `/${entityName.replace(/_/g, '-')}`;
+    context ||= Context;
 
     return new Repository(
       route,
@@ -23,7 +23,8 @@ export class RepositoryFactory {
       new EntityHydrator(),
       new ChangesetGenerator(),
       new EntityFactory(),
-      options
+      options,
+      context
     );
   }
 }

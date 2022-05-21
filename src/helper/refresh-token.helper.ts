@@ -2,12 +2,15 @@
  * Refresh token helper which manages a cache of requests to retry them after the token got refreshed.
  * @class RefreshTokenHelper
  */
-import { AuthToken, Context } from '../data';
+import { AuthToken, Context, ContextData } from '../data';
 import { RefreshTokenGrant } from '../grant';
 import { AdminAuth } from '../auth';
 
 export class RefreshTokenHelper {
   private _whitelists = ['/oauth/token'];
+
+  constructor(private readonly context: ContextData) {
+  }
 
   /**
    * Fires the refresh token request and renews the bearer authentication
@@ -17,13 +20,13 @@ export class RefreshTokenHelper {
    */
   async fireRefreshTokenRequest(originError: any): Promise<AuthToken> {
     try {
-      let authToken = Context.getAuthToken();
+      let authToken = this.context.getAuthToken();
       if (authToken) {
         const grantType = new RefreshTokenGrant(authToken.refreshToken);
-        const adminClient = new AdminAuth(grantType);
+        const adminClient = new AdminAuth(grantType, this.context);
 
         authToken = await adminClient.fetchAccessToken();
-        Context.setAuthToken(authToken);
+        this.context.setAuthToken(authToken);
 
         return authToken;
       } else {

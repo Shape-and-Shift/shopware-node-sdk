@@ -1,13 +1,21 @@
 import { AxiosInstance, AxiosRequestConfig } from 'axios';
 import createHTTPClient from '../service/http.service';
+import { Context, ContextData } from '../data';
 
 export abstract class ApiService {
+  protected readonly context: ContextData;
   protected httpClient: AxiosInstance;
   public contentType: string;
 
-  constructor(contentType = 'application/vnd.api+json') {
-    this.httpClient = createHTTPClient();
-    this.contentType = contentType;
+  constructor(context?: ContextData | string, contentType?: string) {
+    if (typeof context === 'string') {
+      contentType = context;
+      context = Context;
+    }
+
+    this.context = context ?? Context;
+    this.httpClient = createHTTPClient(this.context);
+    this.contentType = contentType ?? 'application/vnd.api+json';
   }
 
   protected serializeUrl(

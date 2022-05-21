@@ -1,15 +1,15 @@
 import { ApiService } from '../service';
 import { AuthorizationException } from '../exception';
 import { GrantParamsType, GrantType } from '../grant';
-import { AuthToken } from '../data';
+import { AuthToken, ContextData } from '../data';
 
 export class AdminAuth extends ApiService {
   public static OAUTH_TOKEN_ENDPOINT = '/oauth/token';
 
   private grantType: GrantType;
 
-  constructor(grantType: GrantType) {
-    super();
+  constructor(grantType: GrantType, context?: ContextData) {
+    super(context);
     this.grantType = grantType;
   }
 

@@ -1,4 +1,3 @@
-import { Context } from '../data';
 import { ApiService } from '../service';
 
 export class AdminApi extends ApiService {
@@ -6,7 +5,7 @@ export class AdminApi extends ApiService {
     additionalHeaders?: object,
   ): Record<string, string> {
     let basicHeaders = super.getBasicHeaders(additionalHeaders);
-    const authToken = Context.getAuthToken();
+    const authToken = this.context.getAuthToken();
     if (authToken) {
       basicHeaders = {
         ...basicHeaders,

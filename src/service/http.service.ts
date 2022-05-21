@@ -1,5 +1,5 @@
 import Axios, { AxiosError, AxiosInstance } from 'axios';
-import { AuthToken, Context } from '../data';
+import { AuthToken, ContextData } from '../data';
 import { types } from './util.service';
 import { Exception } from '../exception';
 import { RefreshTokenHelper } from '../helper/refresh-token.helper';
@@ -7,8 +7,8 @@ import { RefreshTokenHelper } from '../helper/refresh-token.helper';
 /**
  * Initializes the HTTP client with the provided context.
  */
-export default function createHTTPClient(): AxiosInstance {
-  return createClient();
+export default function createHTTPClient(context: ContextData): AxiosInstance {
+  return createClient(context);
 }
 
 /**
@@ -16,8 +16,8 @@ export default function createHTTPClient(): AxiosInstance {
  *
  * @returns {AxiosInstance}
  */
-const createClient = (): AxiosInstance => {
-  const apiEndPoint = Context.getApiEndPoint();
+const createClient = (context: ContextData): AxiosInstance => {
+  const apiEndPoint = context.getApiEndPoint();
   if (types.isEmpty(apiEndPoint)) {
     throw new Exception('Please provide shop-url to context');
   }
@@ -30,8 +30,8 @@ const createClient = (): AxiosInstance => {
     cancelToken: source.token,
   });
 
-  if (Context.isAutoCalRefresh()) {
-    refreshTokenInterceptor(client);
+  if (context.isAutoCalRefresh()) {
+    refreshTokenInterceptor(client, context);
   }
 
   return client;
@@ -41,10 +41,11 @@ const createClient = (): AxiosInstance => {
  * Sets up an interceptor to refresh the token, cache the requests and retry them after the token got refreshed.
  *
  * @param {AxiosInstance} client
+ * @param context
  * @returns {AxiosInstance}
  */
-function refreshTokenInterceptor(client: AxiosInstance): AxiosInstance {
-  const tokenHandler = new RefreshTokenHelper();
+function refreshTokenInterceptor(client: AxiosInstance, context: ContextData): AxiosInstance {
+  const tokenHandler = new RefreshTokenHelper(context);
 
   client.interceptors.response.use(
     (response) => response,

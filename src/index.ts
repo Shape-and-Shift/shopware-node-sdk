@@ -1,5 +1,5 @@
 // Everything you want to publish
-import { Application } from './application';
+import { Application, ApplicationInstance } from './application';
 import {
   AdminApi,
   InfoApi,
@@ -26,6 +26,7 @@ import {
 
 export {
   Application,
+  ApplicationInstance,
   Context,
   AuthToken,
   Criteria,
