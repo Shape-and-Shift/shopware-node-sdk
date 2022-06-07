@@ -99,6 +99,15 @@ criteria.addAssociation("options.group");
 const products = await repository.search(criteria, Context);
 ```
 
+## Using multiple Application instances
+We added support for multiple connections. To instantiate a connection to certain shop, you can simply do this:
+```js
+import { ApplicationInstance } from '@shapeandshift/shopware-node-sdk';
+
+const shopwareApplication1 = new ApplicationInstance({ shopUrl: 'http://merchant1.test' });
+const shopwareApplication2 = new ApplicationInstance({ shopUrl: 'http://merchant2.test' });
+```
+
 ## Working with Admin API Apis
 - Current supported apis:
     - [InfoApi](/src/api/info.api.ts)
