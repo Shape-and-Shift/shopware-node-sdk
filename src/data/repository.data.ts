@@ -41,9 +41,10 @@ export class Repository {
     changesetGenerator: ChangesetGenerator,
     entityFactory: EntityFactory,
     options: RepositoryOptions,
+    context: ContextData,
   ) {
     this.route = route;
-    this.httpClient = createHTTPClient();
+    this.httpClient = createHTTPClient(context);
     this.entityDefinition = entityDefinition;
     this.entityName = entityDefinition.entity;
     this.hydrator = hydrator;

@@ -11,45 +11,43 @@ export type initOptions = {
   autoCallRefresh?: boolean;
 };
 
-export class Application {
-  public static init({
-    shopUrl,
-    apiPath = '/api',
-    autoCallRefresh = true,
-  }: initOptions): void {
-    Context.setApiEndPoint(shopUrl, apiPath);
-    Context.setApiResourcePath(shopUrl, apiPath);
-    Context.setAutoCallRefresh(autoCallRefresh);
-  }
+const defaultOptions = {
+  apiPath: '/api',
+  autoCallRefresh: true,
+};
 
-  public static async setAuthToken(authToken: AuthToken | null): Promise<void> {
-    Context.setAuthToken(authToken);
-    if (authToken) {
-      await Application.loadEntitySchema();
+export class ApplicationInstance {
+  readonly #context: ContextData;
+
+  constructor(options: initOptions | ContextData) {
+    if (options instanceof ContextData) {
+      this.#context = options;
+    } else {
+      const { shopUrl } = options;
+      let { apiPath, autoCallRefresh} = options;
+      this.#context = new ContextData();
+
+      apiPath ||= defaultOptions.apiPath;
+      autoCallRefresh ||= defaultOptions.autoCallRefresh;
+
+      this.#context.setApiEndPoint(options.shopUrl, apiPath);
+      this.#context.setApiResourcePath(shopUrl, apiPath);
+      this.#context.setAutoCallRefresh(autoCallRefresh ?? defaultOptions.autoCallRefresh);
     }
   }
 
-  public static async authenticate(grantType: GrantType): Promise<AuthToken> {
-    const adminAuth: AdminAuth = new AdminAuth(grantType);
-    const authToken: AuthToken = await adminAuth.fetchAccessToken();
-
-    await Application.setAuthToken(authToken);
-
-    return authToken;
-  }
-
-  public static getConText(): ContextData {
-    return Context;
+  getContext(): ContextData {
+    return this.#context;
   }
 
   /**
    * Load new entity scheme from shopware application
    */
-  public static async loadEntitySchema(): Promise<void> {
+  async loadEntitySchema(): Promise<void> {
     const definitionRegistry = EntityDefinitionFactory.getDefinitionRegistry();
 
     if (definitionRegistry.size === 0) {
-      const infoApi: InfoApi = new InfoApi();
+      const infoApi: InfoApi = new InfoApi(this.#context);
 
       // Load schema entity from server
       const schemas: Record<string, EntitySchema> =
@@ -59,5 +57,64 @@ export class Application {
         EntityDefinitionFactory.add(entityName, schemas[entityName]);
       });
     }
+  }
+
+  async authenticate(grantType: GrantType): Promise<AuthToken> {
+    const adminAuth: AdminAuth = new AdminAuth(grantType, this.#context);
+    const authToken: AuthToken = await adminAuth.fetchAccessToken();
+
+    await this.setAuthToken(authToken);
+
+    return authToken;
+  }
+
+  async setAuthToken(authToken: AuthToken | null): Promise<void> {
+    this.#context.setAuthToken(authToken);
+    if (authToken) {
+      await this.loadEntitySchema();
+    }
+  }
+}
+
+export class Application {
+  static #instance = new ApplicationInstance(Context);
+
+  /**
+   * @deprecated Use ApplicationInstance instead
+   */
+  public static init({
+    shopUrl,
+    apiPath = defaultOptions.apiPath,
+    autoCallRefresh = defaultOptions.autoCallRefresh,
+  }: initOptions): void {
+    Context.setApiEndPoint(shopUrl, apiPath);
+    Context.setApiResourcePath(shopUrl, apiPath);
+    Context.setAutoCallRefresh(autoCallRefresh);
+  }
+
+  public static async setAuthToken(authToken: AuthToken | null): Promise<void> {
+    return this.#instance.setAuthToken(authToken);
+  }
+
+  public static async authenticate(grantType: GrantType): Promise<AuthToken> {
+    return this.#instance.authenticate(grantType);
+  }
+
+  /**
+   * @deprecated Use `getContext()` instead
+   */
+  public static getConText(): ContextData {
+    return this.getContext();
+  }
+
+  public static getContext(): ContextData {
+    return this.#instance.getContext();
+  }
+
+  /**
+   * Load new entity scheme from shopware application
+   */
+  public static async loadEntitySchema(): Promise<void> {
+    return this.#instance.loadEntitySchema();
   }
 }
